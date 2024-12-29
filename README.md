@@ -105,13 +105,10 @@ Voici un aperçu de l'architecture complète (généré dans Draw.io) :
    git clone https://github.com/votre-projet-repo.git
    cd votre-projet-repo
 
-### PDF LATEX
-[AITest.pdf](https://github.com/user-attachments/files/18247346/AITest.pdf)
 
 
-## Simulation
 
-https://github.com/user-attachments/assets/070f9513-778f-4c74-96d9-786dfbef0b8b
+
 
 
 
