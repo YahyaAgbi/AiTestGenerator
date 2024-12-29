@@ -105,6 +105,10 @@ Voici un aperçu de l'architecture complète (généré dans Draw.io) :
    git clone https://github.com/votre-projet-repo.git
    cd votre-projet-repo
 
+### Simulation
+
+https://github.com/user-attachments/assets/e542af88-64c8-4c52-95ab-e3473ad350d2
+
 
 
 
