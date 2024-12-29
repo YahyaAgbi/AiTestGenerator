@@ -1,0 +1,61 @@
+version: '3.9'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: TestAI
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+
+  eureka:
+    build:
+      context: ./server
+      dockerfile: Dockerfile  # Moved inside the `build` block
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
+
+  gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile  # Moved inside the `build` block
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka
+
+  backend:
+    build:
+      context: ./Gemini
+      dockerfile: Dockerfile  # Moved inside the `build` block
+    ports:
+      - "8088:8088"
+    depends_on:
+      - eureka
+      - mysql
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile  # Moved inside the `build` block
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "8081:80"
